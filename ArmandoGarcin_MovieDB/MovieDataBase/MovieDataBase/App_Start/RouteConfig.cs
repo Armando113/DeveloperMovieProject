@@ -20,7 +20,7 @@ namespace MovieDataBase
             );
 
             //The page that shows the Collection of movies
-            routes.MapRoute("MovieLib", "MovieLib/{id}", new { controller = "MovieLib", action = "Index", id = UrlParameter.Optional });
+            routes.MapRoute("MovieLib", "MovieLib/{action}/{id}", new { controller = "MovieLib", action = "Index", id = UrlParameter.Optional });
         }
     }
 }

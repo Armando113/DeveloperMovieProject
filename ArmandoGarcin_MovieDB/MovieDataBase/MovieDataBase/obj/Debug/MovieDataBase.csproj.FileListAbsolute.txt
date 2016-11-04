@@ -38,3 +38,7 @@ C:\Users\Armando\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\Mo
 C:\Users\Armando\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\MovieDataBase\MovieDataBase\obj\Debug\MovieDataBase.csprojResolveAssemblyReference.cache
 C:\Users\Armando\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\MovieDataBase\MovieDataBase\obj\Debug\MovieDataBase.dll
 C:\Users\Armando\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\MovieDataBase\MovieDataBase\obj\Debug\MovieDataBase.pdb
+C:\Users\Armando\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\MovieDataBase\MovieDataBase\bin\EntityFramework.dll
+C:\Users\Armando\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\MovieDataBase\MovieDataBase\bin\EntityFramework.SqlServer.dll
+C:\Users\Armando\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\MovieDataBase\MovieDataBase\bin\EntityFramework.xml
+C:\Users\Armando\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\MovieDataBase\MovieDataBase\bin\EntityFramework.SqlServer.xml
