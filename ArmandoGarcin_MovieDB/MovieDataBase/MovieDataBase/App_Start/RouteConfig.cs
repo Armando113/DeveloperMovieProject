@@ -19,7 +19,8 @@ namespace MovieDataBase
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
-            //Maybe add a Movie page here?
+            //The page that shows the Collection of movies
+            routes.MapRoute("MovieLib", "MovieLib/{id}", new { controller = "MovieLib", action = "Index", id = UrlParameter.Optional });
         }
     }
 }
