@@ -10,6 +10,12 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+<p>
+    @Html.TextBox("MovieName_TXB1", "Search movie...", new {@class = "form-control" })
+</p>
+<p>
+    @Html.DropDownList("Rating", new SelectList(Enum.GetValues(typeof(MovieDataBase.MovieData.MovieRating))), "Select Rating:", new { @class = "form-control" });
+</p>
 <table class="table">
     <tr>
         <th>
