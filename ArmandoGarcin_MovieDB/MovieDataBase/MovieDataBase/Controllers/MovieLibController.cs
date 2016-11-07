@@ -9,8 +9,6 @@ namespace MovieDataBase.Controllers
     public class MovieLibController : Controller
     {
 
-        private List<MovieData.Movie> movieList;
-
         public MovieLibController()
         {
 
@@ -26,23 +24,17 @@ namespace MovieDataBase.Controllers
         // GET: MovieLib
         public ActionResult Index()
         {
-            //Temporal list to show off in the view
-            if(movieList == null)
-            {
-                movieList = new List<MovieData.Movie>();
+            //Get the list from the Database
 
-                movieList.Add(new MovieData.Movie("LOTR", "Action-Fantasy", 2003));
-                movieList.Add(new MovieData.Movie("Star Wars 4", "Sci-Fi", 1978));
-                movieList.Add(new MovieData.Movie("Revenant", "Drama", 2015));
-            }
 
-            return View(movieList);
+            return View(MovieData.MovieDBManager.GetMovieList());
         }
 
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int id, string _name, string _genre, int _year)
         {
-            Console.WriteLine(id.ToString());
+            //Add the movie
+            MovieData.MovieDBManager.AddMovie(id, _name, _genre, _year);
 
             return RedirectToAction("Index");
         }
