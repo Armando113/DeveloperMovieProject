@@ -12,23 +12,21 @@ namespace MovieDataBase.MovieData
     using System;
     using System.Collections.Generic;
     
-    public partial class Movy
+    public partial class User
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string Genre { get; set; }
-        public Nullable<int> Year { get; set; }
+        public string Email { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
 
-        public Movy()
+        public User()
         {
+        }
+        public User(string _email, string _username, string _password)
+        {
+            Email = _email;
+            Username = _username;
+            Password = _password;
+        }
 
-        }
-        public Movy(int _id, string _name, string _genre, Nullable<int> _year = 0)
-        {
-            ID = _id;
-            Name = _name;
-            Genre = Genre;
-            Year = _year;
-        }
     }
 }

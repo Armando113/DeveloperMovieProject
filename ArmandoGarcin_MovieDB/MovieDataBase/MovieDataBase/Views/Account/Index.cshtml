@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        @if (MovieDataBase.Login.LoginManager.IsLoggedIn())
+        {
+            <p>
+                @Html.DisplayText(MovieDataBase.Login.LoginManager.GetCurrentUser().GetUsername());
+            </p>
+            <p>
+                @Html.DisplayText(MovieDataBase.Login.LoginManager.GetCurrentUser().GetEmail());
+            </p>
+        }
+        else
+        {
+            Response.Redirect("~/Account/Create");
+        }
+    </div>
+</body>
+</html>

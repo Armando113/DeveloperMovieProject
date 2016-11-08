@@ -21,10 +21,6 @@ namespace MovieDataBase.MovieData
         {
             movieList = new List<Movie>();
 
-            //movieList.Add(new MovieData.Movie("Lord of the Rings: The Return of the King", "Action-Fantasy", 2003));
-            //movieList.Add(new MovieData.Movie("Star Wars: A New Hope", "Sci-Fi", 1978));
-            //movieList.Add(new MovieData.Movie("Revenant", "Drama", 2015));
-
             //Create the DB class
             movieDB = new MovieDBEntities1();
 
@@ -32,15 +28,10 @@ namespace MovieDataBase.MovieData
 
             AddFromDB();
 
-            //A new Movy class (Remind me why is it called Movy again???)
-            //Movy movy = new Movy();
-            //movy.ID = 0123;
-
         }
 
         private Movy CreateMovy(int _id, string _name, string _genre, int _year)
         {
-
             return new Movy(_id, _name, _genre, _year);
         }
 

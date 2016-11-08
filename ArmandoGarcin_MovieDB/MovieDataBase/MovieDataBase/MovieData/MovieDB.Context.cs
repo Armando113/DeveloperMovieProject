@@ -26,5 +26,6 @@ namespace MovieDataBase.MovieData
         }
     
         public virtual DbSet<Movy> Movies { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

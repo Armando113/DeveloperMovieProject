@@ -130,11 +130,14 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MovieLibController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Login\LoginData.cs" />
+    <Compile Include="Login\LoginManager.cs" />
     <Compile Include="MovieData\Movie.cs" />
     <Compile Include="MovieData\MovieDB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -154,6 +157,9 @@
     <Compile Include="MovieData\MovieDBManager.cs" />
     <Compile Include="MovieData\MovieRating.cs" />
     <Compile Include="MovieData\Movy.cs">
+      <DependentUpon>MovieDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MovieData\User.cs">
       <DependentUpon>MovieDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -212,10 +218,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_MovieLayout.cshtml" />
     <Content Include="Views\MovieLib\Index.cshtml" />
+    <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Login\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

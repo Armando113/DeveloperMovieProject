@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Login</h2>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login to your account</title>
+</head>
+
+<body>
+    <div class="form-group">
+        <p>
+            @Html.DisplayName("Email: ");
+            @Html.TextBox("", null);
+        </p>
+        <p>
+            @Html.DisplayName("Password: ");
+            @Html.Password("", null);
+        </p>
+        <p>
+            
+        </p>
+    </div>
+</body>
