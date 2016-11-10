@@ -25,6 +25,9 @@ namespace TheMovieDB
             //Register Login Page
             routes.MapRoute("Login", "Login/{action}/{id}", new { controller = "Login", action = "Index", id = UrlParameter.Optional });
 
+            //Register Login Page
+            routes.MapRoute("Editor", "Editor/{action}/{id}", new { controller = "Editor", action = "Index", id = UrlParameter.Optional });
+
         }
     }
 }
