@@ -18,6 +18,9 @@ namespace TheMovieDB
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            //Register MovieLib page
+            routes.MapRoute("MovieLib", "MovieLib/{action}/{id}", new { controller = "MovieLib", action = "Index", id = UrlParameter.Optional });
         }
     }
 }
