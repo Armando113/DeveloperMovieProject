@@ -58,3 +58,4 @@ C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheM
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Newtonsoft.Json.xml
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\obj\Debug\TheMovieDB.dll
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\obj\Debug\TheMovieDB.pdb
+C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\obj\Debug\TheMovieDB.csprojResolveAssemblyReference.cache

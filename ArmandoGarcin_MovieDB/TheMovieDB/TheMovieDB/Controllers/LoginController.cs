@@ -40,14 +40,14 @@ namespace TheMovieDB.Controllers
 
             //Using Identity
             AppUser user = new AppUser();
-            AppUserStore userStore = new AppUserStore(new MovieDBContext());
+            AppUserStore userStore = new AppUserStore(new IdentityDBContext());
             AppUserManager userMan = new AppUserManager(userStore);
 
             user.Email = usr.Email;
             user.UserName = usr.UserName;
             user.PasswordHash = usr.PasswordHash;
 
-            IdentityResult result = userMan.Create(user, user.PasswordHash);
+            IdentityResult result = userMan.Create(user);
             if(!result.Succeeded)
             {
                 Console.WriteLine("Error creating User");
