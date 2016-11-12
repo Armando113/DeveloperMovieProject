@@ -24,6 +24,8 @@ C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheM
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.AI.Web.dll
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.AI.WindowsServer.dll
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.ApplicationInsights.dll
+C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Newtonsoft.Json.dll
@@ -42,6 +44,8 @@ C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheM
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.AI.Web.xml
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.ApplicationInsights.xml
+C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\System.Web.Helpers.xml
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\System.Web.Mvc.xml
@@ -52,10 +56,5 @@ C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheM
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\System.Web.WebPages.Razor.xml
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Antlr3.Runtime.pdb
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Newtonsoft.Json.xml
-C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\obj\Debug\TheMovieDB.csprojResolveAssemblyReference.cache
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\obj\Debug\TheMovieDB.dll
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\obj\Debug\TheMovieDB.pdb
-C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.AspNet.Identity.Core.dll
-C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.AspNet.Identity.EntityFramework.dll
-C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.AspNet.Identity.Core.xml
-C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.AspNet.Identity.EntityFramework.xml

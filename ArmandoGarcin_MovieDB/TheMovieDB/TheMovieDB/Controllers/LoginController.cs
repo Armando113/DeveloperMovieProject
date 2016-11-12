@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TheMovieDB.MovieData;
+using TheMovieDB.Models;
+using Microsoft.AspNet.Identity;
 
 namespace TheMovieDB.Controllers
 {
@@ -16,28 +18,40 @@ namespace TheMovieDB.Controllers
         }
 
         //The entry point of the page
-        public ActionResult CreateAccount()
+        public ActionResult CreateUser()
         {
             return View();
         }
 
         //The HttpPost action function for creating a user
         [HttpPost]
-        public ActionResult CreateAccount(User usr)
+        public ActionResult CreateUser(AppUser usr)
         {
             Console.WriteLine("Hi there!");
 
-            //Get the values from the object model
-            MovieDBContext DBContext = new MovieDBContext();
+            ////Get the values from the object model
+            //MovieDBContext DBContext = new MovieDBContext();
+            ////Add ID here
+            //usr.ID = 1;
+            ////Insert the new user to the Database
+            //DBContext.Users.Add(usr);
+            ////Save changes
+            //DBContext.SaveChanges();
 
-            //Add ID here
-            usr.ID = 1;
+            //Using Identity
+            AppUser user = new AppUser();
+            AppUserStore userStore = new AppUserStore(new MovieDBContext());
+            AppUserManager userMan = new AppUserManager(userStore);
 
-            //Insert the new user to the Database
-            DBContext.Users.Add(usr);
+            user.Email = usr.Email;
+            user.UserName = usr.UserName;
+            user.PasswordHash = usr.PasswordHash;
 
-            //Save changes
-            DBContext.SaveChanges();
+            IdentityResult result = userMan.Create(user, user.PasswordHash);
+            if(!result.Succeeded)
+            {
+                Console.WriteLine("Error creating User");
+            }
 
             return View();
         }

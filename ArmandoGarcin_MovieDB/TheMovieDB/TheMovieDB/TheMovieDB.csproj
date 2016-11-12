@@ -171,6 +171,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AppUser.cs" />
+    <Compile Include="Models\AppUserManager.cs" />
+    <Compile Include="Models\AppUserStore.cs" />
     <Compile Include="MovieData\Genre.cs" />
     <Compile Include="MovieData\Movie.cs" />
     <Compile Include="MovieData\MovieDBContext.cs" />
@@ -220,14 +223,13 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\LoginAdmin.cshtml" />
     <Content Include="Views\Editor\Index.cshtml" />
-    <Content Include="Views\Login\CreateAccount.cshtml" />
     <Content Include="Views\Login\ViewAccounts.cshtml" />
+    <Content Include="Views\Login\CreateUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="DatabaseEntity\" />
     <Folder Include="IdentityLogin\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
