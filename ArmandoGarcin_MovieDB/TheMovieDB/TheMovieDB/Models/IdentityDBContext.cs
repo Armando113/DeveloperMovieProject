@@ -13,7 +13,8 @@ namespace TheMovieDB.Models
     {
         public IdentityDBContext() : base("IdentityString")
         {
-
+            //Always update the database to the latest version available
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<IdentityDBContext, TheMovieDB.Migrations.Configuration>());
         }
 
         //The tables in this Database

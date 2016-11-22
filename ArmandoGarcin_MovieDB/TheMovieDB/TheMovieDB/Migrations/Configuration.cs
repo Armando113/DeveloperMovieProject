@@ -10,6 +10,7 @@ namespace TheMovieDB.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
             ContextKey = "TheMovieDB.Models.IdentityDBContext";
         }
 
