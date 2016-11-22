@@ -59,12 +59,12 @@ namespace TheMovieDB.Controllers
         public ActionResult ViewAccounts()
         {
             //Get the values from the object model
-            MovieDBContext DBContext = new MovieDBContext();
+            IdentityDBContext DBContext = new IdentityDBContext();
 
-            List<User> UserList = new List<MovieData.User>();
+            List<Models.AppUser> UserList = new List<Models.AppUser>();
 
             //Get the users from the database
-            foreach(User _user in DBContext.Users)
+            foreach(Models.AppUser _user in DBContext.Users)
             {
                 UserList.Add(_user);
             }

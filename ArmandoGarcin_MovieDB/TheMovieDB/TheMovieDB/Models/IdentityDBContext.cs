@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.Identity;
+using TheMovieDB.MovieData;
+using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace TheMovieDB.Models
@@ -13,5 +15,12 @@ namespace TheMovieDB.Models
         {
 
         }
+
+        //The tables in this Database
+        //Our Table for the movies
+        public DbSet<Movie> Movies { get; set; }
+        //Our table for the Genre
+        public DbSet<Genre> Genres { get; set; }
+
     }
 }

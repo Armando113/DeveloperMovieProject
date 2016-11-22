@@ -4,10 +4,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using TheMovieDB.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace TheMovieDB.MovieData
 {
-    public class MovieDBContext : DbContext
+    public class MovieDBContext : IdentityDbContext<Models.AppUser>
     {
 
         public MovieDBContext() : base("TheMovieDB")

@@ -59,3 +59,5 @@ C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheM
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\obj\Debug\TheMovieDB.dll
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\obj\Debug\TheMovieDB.pdb
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\obj\Debug\TheMovieDB.csprojResolveAssemblyReference.cache
+C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\obj\Debug\TheMovieDB.Migrations.InitialCreate.resources
+C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\obj\Debug\TheMovieDB.csproj.GenerateResource.Cache
