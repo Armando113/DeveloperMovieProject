@@ -17,6 +17,11 @@ namespace TheMovieDB.Models
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<IdentityDBContext, TheMovieDB.Migrations.Configuration>());
         }
 
+        public static IdentityDBContext Create()
+        {
+            return new IdentityDBContext();
+        }
+
         //The tables in this Database
         //Our Table for the movies
         public DbSet<Movie> Movies { get; set; }
