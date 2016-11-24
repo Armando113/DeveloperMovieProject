@@ -74,7 +74,7 @@ namespace TheMovieDB.Controllers
         {
             if(ModelState.IsValid)
             {
-                var user = new AppUser { UserName = _model.Email, Email = _model.Email };
+                var user = new AppUser { UserName = _model.UserName, Email = _model.Email };
                 var result = await appUserMan.CreateAsync(user, _model.Password);
 
                 if(result.Succeeded)
@@ -87,39 +87,6 @@ namespace TheMovieDB.Controllers
 
             return View(_model);
         }
-
-        //The HttpPost action function for creating a user
-        //[HttpPost]
-        /*public ActionResult CreateUser(AppUser usr)
-        {
-            Console.WriteLine("Hi there!");
-
-            ////Get the values from the object model
-            //MovieDBContext DBContext = new MovieDBContext();
-            ////Add ID here
-            //usr.ID = 1;
-            ////Insert the new user to the Database
-            //DBContext.Users.Add(usr);
-            ////Save changes
-            //DBContext.SaveChanges();
-
-            //Using Identity
-            AppUser user = new AppUser();
-            AppUserStore userStore = new AppUserStore(new IdentityDBContext());
-            AppUserManager userMan = new AppUserManager(userStore);
-
-            user.Email = usr.Email;
-            user.UserName = usr.UserName;
-            user.PasswordHash = usr.PasswordHash;
-
-            IdentityResult result = userMan.Create(user);
-            if(!result.Succeeded)
-            {
-                Console.WriteLine("Error creating User");
-            }
-
-            return View();
-        }*/
 
         public ActionResult ViewAccounts()
         {
@@ -156,7 +123,8 @@ namespace TheMovieDB.Controllers
                 return View(_model);
             }
 
-            var result = await signInManager.PasswordSignInAsync(_model.Email, _model.Password, _model.RememberMe, shouldLockout: false);
+            //PasswordSignInAsync works with username, NOT Email!!
+            var result = await signInManager.PasswordSignInAsync(_model.UserName, _model.Password, _model.RememberMe, shouldLockout: false);
 
             switch (result)
             {

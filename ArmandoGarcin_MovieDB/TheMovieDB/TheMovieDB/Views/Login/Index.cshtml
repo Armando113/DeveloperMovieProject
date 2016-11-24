@@ -1,18 +1,24 @@
-﻿@{
-    ViewBag.Title = "Account";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Index";
 }
+<h2>Index</h2>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Admin Account info</title>
-</head>
-<body>
-    <div>
-    
-    </div>
-</body>
-</html>
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+        <p>Hello  @User.Identity.GetUserName() </p>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li> @Html.ActionLink("Login", "LoginUser", "Login")</li>
+        <li> @Html.ActionLink("Register", "CreateUser", "Login")</li>
+    </ul>
+}
