@@ -77,10 +77,13 @@ namespace TheMovieDB.Controllers
                 var user = new AppUser { UserName = _model.UserName, Email = _model.Email };
                 var result = await appUserMan.CreateAsync(user, _model.Password);
 
-                if(result.Succeeded)
+                if(result.Succeeded && !AuthenticationManager.User.Identity.IsAuthenticated)
                 {
                     await signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Login");
+                }else if(result.Succeeded && AuthenticationManager.User.Identity.IsAuthenticated)
+                {
+                    return RedirectToAction("ViewAccounts", "Login");
                 }
                 AddErrors(result);
             }
@@ -145,6 +148,39 @@ namespace TheMovieDB.Controllers
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
+
+        
+
+        [HttpGet]
+        public ActionResult DeleteUser(string _user)
+        {
+            //Find the user if it exists
+            IdentityDBContext dbContext = new IdentityDBContext();
+
+            foreach(AppUser tUser in dbContext.Users)
+            {
+                if(tUser.UserName.Equals(_user))
+                {
+                    Console.WriteLine("Found him/her!");
+                    DeleteViewModel tDelete = new DeleteViewModel();
+
+                    tDelete.UserName = tUser.UserName;
+                    tDelete.Email = tUser.Email;
+
+                    return View(tDelete);
+                }
+            }
+
+            return View();
+        }
+
+        //[HttpPost]
+        //[AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> DeleteUser(DeleteViewModel _user)
+        //{
+
+        //}
 
         private void AddErrors(IdentityResult _result)
         {

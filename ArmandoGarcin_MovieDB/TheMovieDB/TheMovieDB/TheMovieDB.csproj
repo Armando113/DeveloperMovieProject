@@ -258,11 +258,11 @@
     <Content Include="Views\MovieLib\Index.cshtml" />
     <Content Include="Views\MovieLib\MovieView.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Login\LoginAdmin.cshtml" />
     <Content Include="Views\Editor\Index.cshtml" />
     <Content Include="Views\Login\ViewAccounts.cshtml" />
     <Content Include="Views\Login\CreateUser.cshtml" />
     <Content Include="Views\Login\LoginUser.cshtml" />
+    <Content Include="Views\Login\DeleteUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

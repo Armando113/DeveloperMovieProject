@@ -1,19 +1,38 @@
 ﻿@using Microsoft.AspNet.Identity
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Account View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Index</h2>
+<h2>Account View</h2>
 
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    @*using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
         @Html.AntiForgeryToken()
         <p>Hello  @User.Identity.GetUserName() </p>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
-    }
+    }*@
+    <div class="form-group">
+        <div class="col-md-10">
+            <p>Welcome back Admin!</p>
+            <p>@Html.Label(@User.Identity.GetUserName())</p>
+        </div>
+    </div>
+
+    <div>
+        <div class="col-md-10">
+            <h3>What do you want to do today?</h3>
+        </div>
+        <ul class="col-md-10">
+            <li>@Html.ActionLink("Add a new Movie Genre", "Index", "Home")</li>
+            <li>@Html.ActionLink("Add a new Movie", "Index", "Home")</li>
+            <li>@Html.ActionLink("Create a new user", "CreateUser", "Login")</li>
+            <li>@Html.ActionLink("View registered accounts", "ViewAccounts", "Login")</li>
+        </ul>
+    </div>
 }
 else
 {

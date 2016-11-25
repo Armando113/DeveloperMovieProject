@@ -73,3 +73,4 @@ C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheM
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.Owin.Security.xml
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.Owin.Security.Cookies.xml
 C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\arman\Documents\GitHub\DeveloperMovieProject\ArmandoGarcin_MovieDB\TheMovieDB\TheMovieDB\obj\Debug\TheMovieDB.csprojResolveAssemblyReference.cache
