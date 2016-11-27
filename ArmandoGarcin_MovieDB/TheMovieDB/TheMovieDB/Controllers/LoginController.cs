@@ -162,10 +162,7 @@ namespace TheMovieDB.Controllers
                 if(tUser.UserName.Equals(_user))
                 {
                     Console.WriteLine("Found him/her!");
-                    DeleteViewModel tDelete = new DeleteViewModel();
-
-                    tDelete.UserName = tUser.UserName;
-                    tDelete.Email = tUser.Email;
+                    var tDelete = new DeleteViewModel { UserName = tUser.UserName, Email = tUser.Email };
 
                     return View(tDelete);
                 }
@@ -174,13 +171,41 @@ namespace TheMovieDB.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //[AllowAnonymous]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> DeleteUser(DeleteViewModel _user)
-        //{
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> DeleteUser(DeleteViewModel _model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Login");
+            }
 
-        //}
+            var tUser = appUserMan.FindByEmail(_model.Email);
+            var tLogins = tUser.Logins;
+            var tRoles = await appUserMan.GetRolesAsync(tUser.Id);
+            IdentityDBContext dbContext = new IdentityDBContext();
+            using (var transaction = dbContext.Database.BeginTransaction())
+            {
+                foreach(var logins in tLogins.ToList())
+                {
+                    await appUserMan.RemoveLoginAsync(logins.UserId, new UserLoginInfo(logins.LoginProvider, logins.ProviderKey));
+                }
+
+                if(tRoles.Count() > 0)
+                {
+                    foreach(var item in tRoles.ToList())
+                    {
+                        var result = await appUserMan.RemoveFromRoleAsync(tUser.Id, item);
+                    }
+                }
+
+                await appUserMan.DeleteAsync(tUser);
+                transaction.Commit();
+            }
+            //Else, just return to the View Accounts page
+            return RedirectToAction("ViewAccounts", "Login");
+        }
 
         private void AddErrors(IdentityResult _result)
         {
@@ -198,6 +223,24 @@ namespace TheMovieDB.Controllers
             }
 
             return RedirectToAction("Index", "Home");
+        }
+
+        private AppUser FindUserViaUsername(string _username)
+        {
+
+            //Find the user if it exists
+            IdentityDBContext dbContext = new IdentityDBContext();
+
+
+            foreach (AppUser tUser in dbContext.Users)
+            {
+                if (tUser.UserName.Equals(_username))
+                {
+                    return tUser;
+                }
+            }
+
+            return null;
         }
     }
 }
