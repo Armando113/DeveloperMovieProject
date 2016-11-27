@@ -10,5 +10,12 @@ namespace TheMovieDB.Models
     public class AppUser : IdentityUser
     {
 
+        public string Phone { get; set; }
+
+        public AppUser()
+        {
+            
+        }
+
     }
 }
