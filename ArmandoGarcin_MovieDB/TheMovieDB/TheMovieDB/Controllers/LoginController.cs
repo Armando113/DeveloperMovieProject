@@ -74,7 +74,7 @@ namespace TheMovieDB.Controllers
         {
             if(ModelState.IsValid)
             {
-                var user = new AppUser { UserName = _model.UserName, Email = _model.Email };
+                var user = new AppUser { UserName = _model.UserName, Email = _model.Email, Phone = _model.Phone };
                 var result = await appUserMan.CreateAsync(user, _model.Password);
 
                 if(result.Succeeded && !AuthenticationManager.User.Identity.IsAuthenticated)
@@ -98,10 +98,16 @@ namespace TheMovieDB.Controllers
 
             List<Models.AppUser> UserList = new List<Models.AppUser>();
 
+            //Get our current logged in user
+            string userID = User.Identity.GetUserName();
+
             //Get the users from the database
             foreach(Models.AppUser _user in DBContext.Users)
             {
-                UserList.Add(_user);
+                if(!_user.UserName.Equals(userID))
+                {
+                    UserList.Add(_user);
+                }
             }
 
             return View(UserList);
@@ -149,25 +155,76 @@ namespace TheMovieDB.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        
+        [HttpGet]
+        public ActionResult EditUser(string _user)
+        {
+            if(Request.IsAuthenticated)
+            {
+                //Find the user if it exists
+                IdentityDBContext dbContext = new IdentityDBContext();
+
+                foreach (AppUser tUser in dbContext.Users)
+                {
+                    if (tUser.UserName.Equals(_user))
+                    {
+                        var tEdit = new EditViewModel { UserName = tUser.UserName, Email = tUser.Email, Phone = tUser.Phone };
+
+                        return View(tEdit);
+                    }
+                }
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public async Task<ActionResult> EditUser(EditViewModel _model)
+        {
+            if(!ModelState.IsValid)
+            {
+                return RedirectToAction("Index", "Login");
+            }
+
+            //Update data
+            var tUser = appUserMan.FindByEmail(_model.Email);
+
+            IdentityDBContext dbContext = new IdentityDBContext();
+
+            using (var transaction = dbContext.Database.BeginTransaction())
+            {
+                //Edit all available settings
+                tUser.Phone = _model.Phone;
+
+                //Update in the database
+                await appUserMan.UpdateAsync(tUser);
+                transaction.Commit();
+            }
+
+            return RedirectToAction("ViewAccounts", "Login");
+        }
 
         [HttpGet]
         public ActionResult DeleteUser(string _user)
         {
-            //Find the user if it exists
-            IdentityDBContext dbContext = new IdentityDBContext();
-
-            foreach(AppUser tUser in dbContext.Users)
+            if(Request.IsAuthenticated)
             {
-                if(tUser.UserName.Equals(_user))
+                if (!User.Identity.GetUserName().Equals(_user))
                 {
-                    Console.WriteLine("Found him/her!");
-                    var tDelete = new DeleteViewModel { UserName = tUser.UserName, Email = tUser.Email };
+                    //Find the user if it exists
+                    IdentityDBContext dbContext = new IdentityDBContext();
 
-                    return View(tDelete);
+                    foreach (AppUser tUser in dbContext.Users)
+                    {
+                        if (tUser.UserName.Equals(_user))
+                        {
+                            var tDelete = new DeleteViewModel { UserName = tUser.UserName, Email = tUser.Email };
+
+                            return View(tDelete);
+                        }
+                    }
                 }
             }
-
             return View();
         }
 

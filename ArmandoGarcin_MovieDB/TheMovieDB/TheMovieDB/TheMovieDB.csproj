@@ -263,6 +263,7 @@
     <Content Include="Views\Login\CreateUser.cshtml" />
     <Content Include="Views\Login\LoginUser.cshtml" />
     <Content Include="Views\Login\DeleteUser.cshtml" />
+    <Content Include="Views\Login\EditUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

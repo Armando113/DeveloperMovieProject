@@ -1,0 +1,49 @@
+﻿@model TheMovieDB.Models.EditViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Edit User";
+}
+
+<h2>Edit User</h2>
+
+@using (Html.BeginForm("EditUser", "Login", FormMethod.Post))
+{
+    if (Request.IsAuthenticated)
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group dl-horizontal">
+            <hr/>
+            @Html.HiddenFor(m => m.UserName)
+            @Html.HiddenFor(m => m.Email)
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(m => m.Email)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(m => m.UserName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(m => m.UserName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.UserName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(m => m.Phone)
+                </dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Phone)
+                </dd>
+            </dl>
+            <div class="form-actions no-color">
+                <input type="submit" value="Save Changes" class="btn btn-default" />
+                @Html.ActionLink("Cancel", "ViewAccounts", "Login")
+            </div>
+        </div>
+    }
+}

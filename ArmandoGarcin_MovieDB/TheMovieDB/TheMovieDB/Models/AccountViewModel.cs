@@ -34,6 +34,22 @@ namespace TheMovieDB.Models
 
     }
 
+    public class EditViewModel
+    {
+        [Required]
+        [Display(Name = "Username")]
+        public string UserName { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
+        [Required]
+        [Display(Name = "Phone")]
+        [Phone]
+        public string Phone { get; set; }
+    }
+
     public class RegisterViewModel
     {
         [Required]

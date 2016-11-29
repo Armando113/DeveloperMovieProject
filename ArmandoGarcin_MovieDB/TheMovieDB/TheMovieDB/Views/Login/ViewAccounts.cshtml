@@ -8,7 +8,7 @@
 @if (Request.IsAuthenticated)
 {
     <h2>View</h2>
-
+    @Html.AntiForgeryToken();
     <p>
         @Html.ActionLink("Create New", "CreateUser", "Login")
     </p>
