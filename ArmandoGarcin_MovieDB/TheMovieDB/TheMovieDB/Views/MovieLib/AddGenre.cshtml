@@ -1,0 +1,38 @@
+﻿@model TheMovieDB.MovieData.AddGenreModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Add a new Genre! :)";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<hr/>
+
+@using (Html.BeginForm("AddGenre", "MovieLib", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    if(Request.IsAuthenticated)
+    {
+        <div class="form-group dl-horizontal">
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(m => m.GenreName)
+                </dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.GenreName, new { @class = "form-control" })
+                </dd>
+            </dl>
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Add New Genre" class="btn btn-default"/>
+                @Html.ActionLink("Cancel", "Index", "Login")
+            </div>
+        </div>
+
+    }
+    else
+    {
+        Response.Redirect("~/Login/LoginUser");
+    }
+}

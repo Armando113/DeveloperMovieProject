@@ -28,5 +28,12 @@ namespace TheMovieDB.Models
         //Our table for the Genre
         public DbSet<Genre> Genres { get; set; }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //Configure one-to-many
+            //modelBuilder.Entity<Movie>().HasRequired<Genre>(s => s.MovieGenre).WithMany(s => s.Movies);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

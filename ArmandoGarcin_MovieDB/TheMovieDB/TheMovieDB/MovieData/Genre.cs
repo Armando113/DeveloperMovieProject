@@ -12,13 +12,15 @@ namespace TheMovieDB.MovieData
         //Genre ID
         public int GenreID { get; set; }
         //The Genre name
+        [Required]
+        [Display(Name = "Genre")]
         public string GenreName { get; set; }
         //Our linked movies
-        public ICollection<Movie> Movies { get; set; }
+        public virtual ICollection<Movie> Movies { get; set; }
 
         public Genre()
         {
-
+            Movies = new List<Movie>();
         }
     }
 }

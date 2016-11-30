@@ -13,7 +13,7 @@ namespace TheMovieDB.MovieData
         //The name of the Movie
         public string MovieName { get; set; }
         //The Genre of the movie
-        public Genre MovieGenre { get; set; }
+        public virtual Genre MovieGenre { get; set; }
         //The Date of release
         public DateTime? ReleaseDate { get; set; }
 

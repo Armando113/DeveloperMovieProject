@@ -213,6 +213,7 @@
     <Compile Include="MovieData\Genre.cs" />
     <Compile Include="MovieData\Movie.cs" />
     <Compile Include="MovieData\MovieDBContext.cs" />
+    <Compile Include="MovieData\MovieViewModels.cs" />
     <Compile Include="MovieData\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -264,6 +265,7 @@
     <Content Include="Views\Login\LoginUser.cshtml" />
     <Content Include="Views\Login\DeleteUser.cshtml" />
     <Content Include="Views\Login\EditUser.cshtml" />
+    <Content Include="Views\MovieLib\AddGenre.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
