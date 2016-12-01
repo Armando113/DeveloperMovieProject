@@ -266,6 +266,8 @@
     <Content Include="Views\Login\DeleteUser.cshtml" />
     <Content Include="Views\Login\EditUser.cshtml" />
     <Content Include="Views\MovieLib\AddGenre.cshtml" />
+    <Content Include="Views\MovieLib\ViewMovies.cshtml" />
+    <Content Include="Views\MovieLib\AddMovie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

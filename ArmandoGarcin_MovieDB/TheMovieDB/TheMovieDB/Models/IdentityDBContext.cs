@@ -30,10 +30,10 @@ namespace TheMovieDB.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //Configure one-to-many
-            //modelBuilder.Entity<Movie>().HasRequired<Genre>(s => s.MovieGenre).WithMany(s => s.Movies);
-
             base.OnModelCreating(modelBuilder);
+
+            //Configure one-to-many
+            modelBuilder.Entity<Genre>().HasMany(m => m.Movies).WithRequired(m => m.MovieGenre).HasForeignKey(m => m.MovieGenreID);
         }
     }
 }

@@ -10,6 +10,8 @@ namespace TheMovieDB.MovieData
     {
         //Columns of our Database
         //Genre ID
+        [Key]
+        [Required]
         public int GenreID { get; set; }
         //The Genre name
         [Required]

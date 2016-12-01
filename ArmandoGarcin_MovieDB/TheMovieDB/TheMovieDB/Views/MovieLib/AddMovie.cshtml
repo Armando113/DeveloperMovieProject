@@ -1,0 +1,44 @@
+﻿@model TheMovieDB.MovieData.AddMovieModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Add a new Movie!</h2>
+
+@using (Html.BeginForm("AddMovie", "MovieLib", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.MovieGenreName)
+    @Html.HiddenFor(m => m.MovieGenreID)
+    if(Request.IsAuthenticated)
+    {
+        <div class="form-group dl-horizontal">
+            <dl>
+                <dt>
+                    @Html.DisplayNameFor(m => m.MovieGenreName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(m => m.MovieGenreName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(m => m.MovieName)
+                </dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.MovieName)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(m => m.ReleaseDate)
+                </dt>
+                <dd>
+                    @Html.TextBoxFor(m => m.ReleaseDate, new { @class = "datefield", type = "date"})
+                </dd>
+            </dl>
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Add Movie" class="btn btn-default"/>
+                @Html.ActionLink("Cancel", "Index")
+            </div>
+        </div>
+    }
+}

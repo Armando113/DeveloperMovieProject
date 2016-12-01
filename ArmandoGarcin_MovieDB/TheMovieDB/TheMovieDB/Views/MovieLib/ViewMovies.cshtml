@@ -1,0 +1,43 @@
+﻿@model TheMovieDB.MovieData.ViewMovieModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Movies</h2>
+
+<br/>
+
+@Html.ActionLink("Add a new Movie", "AddMovie", new { _genreID = Model.MovieGenreID})
+
+<table class="table">
+    <tr>
+    </tr>
+    <tr>
+        <th>
+            @Html.DisplayName("Movie Name")
+        </th>
+        <th>
+            @Html.DisplayName("Genre")
+        </th>
+        <th>
+            @Html.DisplayName("Release Date")
+        </th>
+        <th></th>
+        <hr />
+    </tr>
+    @Html.AntiForgeryToken()
+    @foreach (var item in Model.MovieList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(m => item.MovieName)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.MovieGenre.GenreName)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.ReleaseDate)
+            </td>
+        </tr>
+    }
+</table>
