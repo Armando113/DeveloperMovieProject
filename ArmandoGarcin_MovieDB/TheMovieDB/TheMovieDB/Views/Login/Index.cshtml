@@ -30,6 +30,13 @@
             <li>@Html.ActionLink("Add a new Movie Genre", "AddGenre", "MovieLib")</li>
             <li>@Html.ActionLink("Create a new user", "CreateUser", "Login")</li>
             <li>@Html.ActionLink("View registered accounts", "ViewAccounts", "Login")</li>
+            @using (Html.BeginForm("LogOff", "Login", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+            {
+                @Html.AntiForgeryToken()
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+                </ul>
+            }
         </ul>
     </div>
 }
