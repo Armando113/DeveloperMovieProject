@@ -38,6 +38,13 @@
             <td>
                 @Html.DisplayFor(m => item.ReleaseDate)
             </td>
+            @if(Request.IsAuthenticated)
+            {
+                <td>
+                    @Html.ActionLink("Edit", "EditMovie", new { _movieID = item.MovieID}) | 
+                    @Html.ActionLink("Delete", "DeleteMovie", new { _movieID = item.MovieID})
+                </td>
+            }
         </tr>
     }
 </table>

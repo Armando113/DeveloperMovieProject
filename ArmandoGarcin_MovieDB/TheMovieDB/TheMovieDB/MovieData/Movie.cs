@@ -16,9 +16,10 @@ namespace TheMovieDB.MovieData
         public int MovieID { get; set; }
         //The name of the Movie
         [Required]
+        [Display(Name = "Name")]
         public string MovieName { get; set; }
         //The Genre ID
-        public int? MovieGenreID { get; set; }
+        public int MovieGenreID { get; set; }
         //The Genre of the movie
         [Display(Name ="Genre")]
         public virtual Genre MovieGenre { get; set; }

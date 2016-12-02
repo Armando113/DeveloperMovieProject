@@ -55,9 +55,26 @@ namespace TheMovieDB.MovieData
         public DateTime ReleaseDate { get; set; }
     }
 
-    public class DeleteMovieModel
+    public class EditMovieModel
     {
+        [Required]
+        public int MovieID { get; set; }
 
+        [Required]
+        [Display(Name = "Movie Name")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
+        public string MovieName { get; set; }
+
+        [Required]
+        public int MovieGenreID { get; set; }
+
+        [Required]
+        [Display(Name = "Movie Genre")]
+        public string MovieGenreName { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Release Date")]
+        public DateTime ReleaseDate { get; set; }
     }
 
 
