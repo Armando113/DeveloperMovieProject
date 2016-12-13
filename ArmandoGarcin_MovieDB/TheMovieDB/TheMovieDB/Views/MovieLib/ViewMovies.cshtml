@@ -9,7 +9,7 @@
 
 @if (Request.IsAuthenticated)
 {
-    @Html.ActionLink("Add a new Movie", "AddMovie", new { _genreID = Model.MovieGenreID })
+    @Html.ActionLink("Add a new Movie", "AddMovie", new { GenreID = Model.MovieGenreID })
 }
 
 <table class="table">
@@ -44,8 +44,8 @@
             @if(Request.IsAuthenticated)
             {
                 <td>
-                    @Html.ActionLink("Edit", "EditMovie", new { _movieID = item.MovieID}) | 
-                    @Html.ActionLink("Delete", "DeleteMovie", new { _movieID = item.MovieID})
+                    @Html.ActionLink("Edit", "EditMovie", new { MovieID = item.MovieID}) | 
+                    @Html.ActionLink("Delete", "DeleteMovie", new { MovieID = item.MovieID})
                 </td>
             }
         </tr>

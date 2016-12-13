@@ -24,12 +24,12 @@
                 @Html.DisplayFor(m => item.GenreName)
             </td>
             <td>
-                @Html.ActionLink("View Movies", "ViewMovies", new { _genreID = item.GenreID})
+                @Html.ActionLink("View Movies", "ViewMovies", new { GenreID = item.GenreID})
             </td>
             @if(Request.IsAuthenticated)
             {
                 <td>
-                    @Html.ActionLink("Delete Genre", "DeleteGenre", new { _genreID = item.GenreID })
+                    @Html.ActionLink("Delete Genre", "DeleteGenre", new { GenreID = item.GenreID })
                 </td>
             }
         </tr>
