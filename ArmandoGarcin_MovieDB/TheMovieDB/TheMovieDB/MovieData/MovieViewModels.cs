@@ -40,6 +40,7 @@ namespace TheMovieDB.MovieData
     {
         [Required]
         [Display(Name ="Movie Name")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
         public string MovieName { get; set; }
 
         [Required]
@@ -61,6 +62,7 @@ namespace TheMovieDB.MovieData
 
         [Required]
         [Display(Name = "Movie Name")]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
         public string MovieName { get; set; }
 
         [Required]

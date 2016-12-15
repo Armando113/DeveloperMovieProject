@@ -28,7 +28,7 @@
                 <dd>@Html.TextBoxFor(m => m.ReleaseDate, new { @class = "datefield", type = "date" })</dd>
             </dl>
             <input type="submit" value="Save Changes" class="btn btn-default"/>
-            @Html.ActionLink("Cancel", "ViewMovies", new { GenreID = Model.MovieGenreID})
+            @Html.ActionLink("Cancel", "ViewMovies", new { _genreID = Model.MovieGenreID})
         </div>
     }
     else

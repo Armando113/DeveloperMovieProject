@@ -23,7 +23,7 @@ namespace TheMovieDB
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/Login/LoginUser")
+                LoginPath = new PathString("/Account/Login")
             });
         }
     }
