@@ -5,11 +5,11 @@
 
 <h2>Movies</h2>
 
-<br/>
+<p>@Html.ActionLink("Go Back", "Index", "MovieLib")</p>
 
 @if (Request.IsAuthenticated)
 {
-    @Html.ActionLink("Add a new Movie", "AddMovie", new { genreID = Model.movieGenreID })
+    <p>@Html.ActionLink("Add a new Movie", "AddMovie", new { genreID = Model.movieGenreID })</p>
 }
 
 <table class="table">

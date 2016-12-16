@@ -98,7 +98,7 @@ namespace TheMovieDB.Controllers
             //Create a string woith the current user
             string currentUserId = User.Identity.GetUserId();
             //Create the list of users, and exclude the one currently logged in
-            List<Models.AppUser> UserList = dbContext.Users.Select(x => x).Where(x => !x.Id.Equals(currentUserId)).ToList();
+            List<AppUser> UserList = dbContext.Users.Select(x => x).Where(x => !x.Id.Equals(currentUserId)).ToList();
             //Return the list to the View
             return View(UserList);
         }
@@ -147,18 +147,18 @@ namespace TheMovieDB.Controllers
         [HttpGet]
         public ActionResult EditUser(string user)
         {
-            if(Request.IsAuthenticated)
+            if(!Request.IsAuthenticated)
             {
-                //Find the user if it exists
-                IdentityDBContext dbContext = new IdentityDBContext();
-                //Use Entity to get the selected user
-                AppUser foundUser = dbContext.Users.Select(x => x).FirstOrDefault(x => x.Id.Equals(user));
-                //Create the model
-                var editModel = new EditViewModel { userName = foundUser.UserName, email = foundUser.Email, phone = foundUser.Phone };
-                //Return the edit model
-                return View(editModel);
+                return View();
             }
-            return View();
+            //Find the user if it exists
+            IdentityDBContext dbContext = new IdentityDBContext();
+            //Use Entity to get the selected user
+            AppUser foundUser = dbContext.Users.Select(x => x).FirstOrDefault(x => x.Id.Equals(user));
+            //Create the model
+            var editModel = new EditViewModel { userName = foundUser.UserName, email = foundUser.Email, phone = foundUser.Phone };
+            //Return the edit model
+            return View(editModel);
         }
 
         [HttpPost]
@@ -192,21 +192,24 @@ namespace TheMovieDB.Controllers
         [HttpGet]
         public ActionResult DeleteUser(string user)
         {
-            if(Request.IsAuthenticated)
+            //If we are not logged in...
+            if(!Request.IsAuthenticated)
             {
-                if (!User.Identity.GetUserName().Equals(user))
-                {
-                    //Find the user if it exists
-                    IdentityDBContext dbContext = new IdentityDBContext();
-
-                    AppUser userToDelete = dbContext.Users.FirstOrDefault(x => x.Id.Equals(user));
-
-                    var deleteModel = new DeleteViewModel { userName = userToDelete.UserName, email = userToDelete.Email };
-
-                    return View(deleteModel);
-                }
+                return View();
             }
-            return View();
+            //Check that we are not deleting the current user
+            if (!User.Identity.GetUserName().Equals(user))
+            {
+                return View();
+            }
+            //Create the context
+            IdentityDBContext dbContext = new IdentityDBContext();
+            //Find the desired user to delete
+            AppUser userToDelete = dbContext.Users.FirstOrDefault(x => x.Id.Equals(user));
+            //Create the model for the view
+            var deleteModel = new DeleteViewModel { userName = userToDelete.UserName, email = userToDelete.Email };
+
+            return View(deleteModel);
         }
 
         [HttpPost]
