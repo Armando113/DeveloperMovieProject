@@ -9,7 +9,7 @@
 
 @if (Request.IsAuthenticated)
 {
-    @Html.ActionLink("Add a new Movie", "AddMovie", new { _genreID = Model.MovieGenreID })
+    @Html.ActionLink("Add a new Movie", "AddMovie", new { genreID = Model.movieGenreID })
 }
 
 <table class="table">
@@ -29,23 +29,23 @@
         <hr />
     </tr>
     @Html.AntiForgeryToken()
-    @foreach (var item in Model.MovieList)
+    @foreach (var item in Model.movieList)
     {
         <tr>
             <td>
-                @Html.DisplayFor(m => item.MovieName)
+                @Html.DisplayFor(m => item.movieName)
             </td>
             <td>
-                @Html.DisplayFor(m => item.MovieGenre.GenreName)
+                @Html.DisplayFor(m => item.movieGenre.genreName)
             </td>
             <td>
-                @Html.DisplayFor(m => item.ReleaseDate)
+                @Html.DisplayFor(m => item.releaseDate)
             </td>
             @if(Request.IsAuthenticated)
             {
                 <td>
-                    @Html.ActionLink("Edit", "EditMovie", new { _movieID = item.MovieID}) | 
-                    @Html.ActionLink("Delete", "DeleteMovie", new { _movieID = item.MovieID})
+                    @Html.ActionLink("Edit", "EditMovie", new { movieID = item.movieID}) | 
+                    @Html.ActionLink("Delete", "DeleteMovie", new { movieID = item.movieID})
                 </td>
             }
         </tr>

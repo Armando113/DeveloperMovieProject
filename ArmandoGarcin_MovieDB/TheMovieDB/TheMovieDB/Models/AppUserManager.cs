@@ -15,9 +15,9 @@ namespace TheMovieDB.Models
         {
         }
 
-        public static AppUserManager Create(IdentityFactoryOptions<AppUserManager> _options, IOwinContext _context)
+        public static AppUserManager Create(IdentityFactoryOptions<AppUserManager> options, IOwinContext context)
         {
-            return new AppUserManager(new AppUserStore(_context.Get<IdentityDBContext>()));
+            return new AppUserManager(new AppUserStore(context.Get<IdentityDBContext>()));
         }
     }
 }

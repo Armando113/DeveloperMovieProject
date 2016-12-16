@@ -15,23 +15,23 @@
 
     @Html.ValidationSummary("", new { @class = "text-danger"})
     <div class="form-group">
-        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.userName, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control"})
+            @Html.TextBoxFor(m => m.userName, new { @class = "form-control"})
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.email, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.email, new { @class = "form-control" })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.Phone, new { @class = "col-md-2 control-label"})
+        @Html.LabelFor(m => m.phone, new { @class = "col-md-2 control-label"})
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control"})
+            @Html.TextBoxFor(m => m.phone, new { @class = "form-control"})
         </div>
     </div>
 
@@ -43,9 +43,9 @@
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.confirmPassword, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            @Html.PasswordFor(m => m.confirmPassword, new { @class = "form-control" })
         </div>
     </div>
 

@@ -9,29 +9,29 @@
 @using (Html.BeginForm("AddMovie", "MovieLib", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    @Html.HiddenFor(m => m.MovieGenreName)
-    @Html.HiddenFor(m => m.MovieGenreID)
+    @Html.HiddenFor(m => m.movieGenreName)
+    @Html.HiddenFor(m => m.movieGenreID)
     if(Request.IsAuthenticated)
     {
         <div class="form-group dl-horizontal">
             <dl>
                 <dt>
-                    @Html.DisplayNameFor(m => m.MovieGenreName)
+                    @Html.DisplayNameFor(m => m.movieGenreName)
                 </dt>
                 <dd>
-                    @Html.DisplayFor(m => m.MovieGenreName)
+                    @Html.DisplayFor(m => m.movieGenreName)
                 </dd>
                 <dt>
-                    @Html.DisplayNameFor(m => m.MovieName)
+                    @Html.DisplayNameFor(m => m.movieName)
                 </dt>
                 <dd>
-                    @Html.TextBoxFor(m => m.MovieName)
+                    @Html.TextBoxFor(m => m.movieName)
                 </dd>
                 <dt>
-                    @Html.DisplayNameFor(m => m.ReleaseDate)
+                    @Html.DisplayNameFor(m => m.releaseDate)
                 </dt>
                 <dd>
-                    @Html.TextBoxFor(m => m.ReleaseDate, new { @class = "datefield", type = "date"})
+                    @Html.TextBoxFor(m => m.releaseDate, new { @class = "datefield", type = "date"})
                 </dd>
             </dl>
 

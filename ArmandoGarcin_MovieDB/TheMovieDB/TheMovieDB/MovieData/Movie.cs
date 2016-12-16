@@ -13,20 +13,20 @@ namespace TheMovieDB.MovieData
         //Our ID (Primary Key)
         [Required]
         [Key]
-        public int MovieID { get; set; }
+        public int movieID { get; set; }
         //The name of the Movie
         [Required]
         [Display(Name = "Name")]
-        public string MovieName { get; set; }
+        public string movieName { get; set; }
         //The Genre ID
-        public int MovieGenreID { get; set; }
+        public int movieGenreID { get; set; }
         //The Genre of the movie
         [Display(Name ="Genre")]
-        public virtual Genre MovieGenre { get; set; }
+        public virtual Genre movieGenre { get; set; }
         //The Date of release
         [DataType(DataType.DateTime)]
         [Display(Name ="Release Date")]
-        public DateTime? ReleaseDate { get; set; }
+        public DateTime? releaseDate { get; set; }
 
         public Movie()
         {

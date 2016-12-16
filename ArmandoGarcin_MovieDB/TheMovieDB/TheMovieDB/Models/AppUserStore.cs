@@ -7,7 +7,7 @@ namespace TheMovieDB.Models
     public class AppUserStore : UserStore<AppUser>
     {
 
-        public AppUserStore(IdentityDBContext _context) : base(_context)
+        public AppUserStore(IdentityDBContext context) : base(context)
         {
 
         }

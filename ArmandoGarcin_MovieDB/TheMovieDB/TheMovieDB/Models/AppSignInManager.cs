@@ -12,14 +12,14 @@ namespace TheMovieDB.Models
     {
 
         //Constructor
-        public AppSignInManager(AppUserManager _appUsrManager, IAuthenticationManager _authenticationManager) : base(_appUsrManager, _authenticationManager)
+        public AppSignInManager(AppUserManager appUsrManager, IAuthenticationManager authenticationManager) : base(appUsrManager, authenticationManager)
         {
 
         }
 
-        public static AppSignInManager Create(IdentityFactoryOptions<AppSignInManager> _options, IOwinContext _context)
+        public static AppSignInManager Create(IdentityFactoryOptions<AppSignInManager> options, IOwinContext context)
         {
-            return new Models.AppSignInManager(_context.GetUserManager<AppUserManager>(), _context.Authentication);
+            return new Models.AppSignInManager(context.GetUserManager<AppUserManager>(), context.Authentication);
         }
     }
 }

@@ -8,13 +8,13 @@ namespace TheMovieDB.MovieData
     public class User
     {
         //The ID
-        public int ID { get; set; }
+        public int id { get; set; }
         //The Email of the User
-        public string Email { get; set; }
+        public string email { get; set; }
         //The username (cannot be null, and is Unique)
-        public string Username { get; set; }
+        public string username { get; set; }
         //The password (we'll need to hide this)
-        public string Password { get; set; }
+        public string password { get; set; }
 
         public User()
         {

@@ -10,29 +10,29 @@ namespace TheMovieDB.MovieData
     {
         [Required]
         [Display(Name = "Genre")]
-        public string GenreName { get; set; }
+        public string genreName { get; set; }
     }
 
     public class DeleteGenreModel
     {
         [Required]
         [Display(Name = "Genre")]
-        public string GenreName { get; set; }
+        public string genreName { get; set; }
 
         [Required]
-        public int GenreID { get; set; }
+        public int genreID { get; set; }
 
         [Required]
-        public ICollection<Movie> MovieList { get; set; }
+        public ICollection<Movie> movieList { get; set; }
     }
 
     public class ViewMovieModel
     {
         [Required]
-        public int MovieGenreID { get; set; }
+        public int movieGenreID { get; set; }
 
         [Required]
-        public List<Movie> MovieList { get; set; }
+        public List<Movie> movieList { get; set; }
     }
 
 
@@ -41,40 +41,40 @@ namespace TheMovieDB.MovieData
         [Required]
         [Display(Name ="Movie Name")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
-        public string MovieName { get; set; }
+        public string movieName { get; set; }
 
         [Required]
-        public int MovieGenreID { get; set; }
+        public int movieGenreID { get; set; }
 
         [Required]
         [Display(Name ="Movie Genre")]
-        public string MovieGenreName { get; set; }
+        public string movieGenreName { get; set; }
 
         [DataType(DataType.DateTime)]
         [Display(Name ="Release Date")]
-        public DateTime ReleaseDate { get; set; }
+        public DateTime releaseDate { get; set; }
     }
 
     public class EditMovieModel
     {
         [Required]
-        public int MovieID { get; set; }
+        public int movieID { get; set; }
 
         [Required]
         [Display(Name = "Movie Name")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
-        public string MovieName { get; set; }
+        public string movieName { get; set; }
 
         [Required]
-        public int MovieGenreID { get; set; }
+        public int movieGenreID { get; set; }
 
         [Required]
         [Display(Name = "Movie Genre")]
-        public string MovieGenreName { get; set; }
+        public string movieGenreName { get; set; }
 
         [DataType(DataType.DateTime)]
         [Display(Name = "Release Date")]
-        public DateTime ReleaseDate { get; set; }
+        public DateTime releaseDate { get; set; }
     }
 
 

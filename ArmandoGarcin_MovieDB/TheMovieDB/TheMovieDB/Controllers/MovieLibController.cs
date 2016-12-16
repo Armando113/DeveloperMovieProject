@@ -41,17 +41,17 @@ namespace TheMovieDB.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult AddGenre(AddGenreModel _model)
+        public ActionResult AddGenre(AddGenreModel model)
         {
             if(ModelState.IsValid)
             {
-                int tID = GetGenreID(_model.GenreName);
+                int temporalID = GetGenreID(model.genreName);
 
                 IdentityDBContext db = new IdentityDBContext();
 
                 foreach (Genre genre in db.Genres)
                 {
-                    if (genre.GenreID == tID)
+                    if (genre.genreID == temporalID)
                     {
                         //Add Error message here
                         return View();
@@ -59,10 +59,10 @@ namespace TheMovieDB.Controllers
                 }
 
                 //Genre does not exist, proceed with the addition to DB
-                Genre nuGenre = new Genre() { GenreID = tID, GenreName = _model.GenreName };
+                Genre newGenre = new Genre() { genreID = temporalID, genreName = model.genreName };
 
                 //Add it to the DB
-                db.Genres.Add(nuGenre);
+                db.Genres.Add(newGenre);
 
                 //Commit
                 db.SaveChanges();
@@ -74,23 +74,23 @@ namespace TheMovieDB.Controllers
         }
 
         [HttpGet]
-        public ActionResult DeleteGenre(int _genreID)
+        public ActionResult DeleteGenre(int genreID)
         {
             if(Request.IsAuthenticated)
             {
                 IdentityDBContext db = new IdentityDBContext();
 
-                List<Movie> movieList = GetMovieList(_genreID, db);
+                List<Movie> movieList = GetMovieList(genreID, db);
 
                 foreach(Genre genre in db.Genres)
                 {
-                    if(genre.GenreID == _genreID && movieList.Count == 0)
+                    if(genre.genreID == genreID && movieList.Count == 0)
                     {
                         //Delete the Genre
                         db.Genres.Remove(genre);
                         break;
                     }
-                    else if (genre.GenreID == _genreID && movieList.Count > 0)
+                    else if (genre.genreID == genreID && movieList.Count > 0)
                     {
                         //add Errors here
                         Console.WriteLine("Error when deleting Genre");
@@ -105,29 +105,29 @@ namespace TheMovieDB.Controllers
         }
 
         [HttpGet]
-        public ActionResult ViewMovies(int _genreID)
+        public ActionResult ViewMovies(int genreID)
         {
             IdentityDBContext dbContext = new IdentityDBContext();
 
-            ViewMovieModel model = new ViewMovieModel() { MovieGenreID = _genreID, MovieList = GetMovieList(_genreID, dbContext) };
+            ViewMovieModel model = new ViewMovieModel() { movieGenreID = genreID, movieList = GetMovieList(genreID, dbContext) };
 
             return View(model);
         }
 
         [HttpGet]
-        public ActionResult AddMovie(int _genreID)
+        public ActionResult AddMovie(int genreID)
         {
             if(Request.IsAuthenticated)
             {
                 IdentityDBContext db = new IdentityDBContext();
 
-                Genre tGenre = db.Genres.Find(_genreID);
+                Genre foundGenre = db.Genres.Find(genreID);
 
-                if(tGenre != null)
+                if(foundGenre != null)
                 {
-                    AddMovieModel tModel = new AddMovieModel() { MovieGenreID = tGenre.GenreID, MovieGenreName = tGenre.GenreName };
+                    AddMovieModel newModel = new AddMovieModel() { movieGenreID = foundGenre.genreID, movieGenreName = foundGenre.genreName };
 
-                    return View(tModel);
+                    return View(newModel);
                 }
 
                 return RedirectToAction("Index", "MovieLib");
@@ -136,77 +136,74 @@ namespace TheMovieDB.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddMovie(AddMovieModel _model)
+        public ActionResult AddMovie(AddMovieModel model)
         {
             if(ModelState.IsValid)
             {
                 IdentityDBContext db = new IdentityDBContext();
-
-                Genre tGenre = db.Genres.Find(_model.MovieGenreID);
-
-                Movie tMovie = new Movie() { MovieID = GetMovieID(_model.MovieName), MovieName = _model.MovieName, ReleaseDate = _model.ReleaseDate, MovieGenre = tGenre, MovieGenreID = tGenre.GenreID };
-
-                //Add it to the Genre list
-                var genreContext = db.Genres.Include(m => m.Movies).SingleOrDefault(m => m.GenreID == _model.MovieGenreID);
-                genreContext.Movies.ToList().Add(tMovie);
-
+                //Find the Genre by ID in the DB
+                Genre foundGenre = db.Genres.Find(model.movieGenreID);
+                //Create the movie 
+                Movie newMovie = new Movie() { movieID = GetMovieID(model.movieName), movieName = model.movieName, releaseDate = model.releaseDate, movieGenre = foundGenre, movieGenreID = foundGenre.genreID };
+                //Get the list from the Genre table
+                List<Movie> genreContext = GetMovieList(model.movieGenreID, db);
+                //Add movie to the list
+                genreContext.Add(newMovie);
                 //Now, add the Movie to the DB
-                db.Movies.Add(tMovie);
-
+                db.Movies.Add(newMovie);
                 //Save changes in the DB
                 db.SaveChanges();
 
-                return RedirectToAction("ViewMovies", "MovieLib", new { _genreID = _model.MovieGenreID });
+                return RedirectToAction("ViewMovies", "MovieLib", new { genreID = model.movieGenreID });
             }
 
             return RedirectToAction("Index", "MovieLib");
         }
 
         [HttpGet]
-        public ActionResult DeleteMovie(int _movieID)
+        public ActionResult DeleteMovie(int movieID)
         {
             if(Request.IsAuthenticated)
             {
                 //Get the Database
                 IdentityDBContext db = new IdentityDBContext();
                 //Find the movie
-                Movie tMovie = db.Movies.Find(_movieID);
-
-                if(tMovie != null)
+                Movie foundMovie = db.Movies.Find(movieID);
+                //Check if the movie exists
+                if(foundMovie != null)
                 {
                     //Delete the movie from the Genre list
-                    List<Movie> movieList = GetMovieList((int)tMovie.MovieGenreID, db);
+                    List<Movie> movieList = GetMovieList((int)foundMovie.movieGenreID, db);
                     //Romeove it from the list
-                    movieList.Remove(tMovie);
+                    movieList.Remove(foundMovie);
                     //Remove
-                    db.Movies.Remove(tMovie);
+                    db.Movies.Remove(foundMovie);
                     //Save Changes
                     db.SaveChanges();
-
-                    return RedirectToAction("ViewMovies", "MovieLib", new { _genreID = tMovie.MovieGenreID });
+                    //Return to the movie list of the genre
+                    return RedirectToAction("ViewMovies", "MovieLib", new { genreID = foundMovie.movieGenreID });
                 }
-
                 return RedirectToAction("Index", "MovieLib");
             }
             return RedirectToAction("LoginUser", "Login");
         }
 
         [HttpGet]
-        public ActionResult EditMovie(int _movieID)
+        public ActionResult EditMovie(int movieID)
         {
             if(Request.IsAuthenticated)
             {
                 IdentityDBContext db = new IdentityDBContext();
 
-                Movie tMovie = db.Movies.Find(_movieID);
+                Movie foundMovie = db.Movies.Find(movieID);
 
                 EditMovieModel editModel = new EditMovieModel()
                 {
-                    MovieGenreID = (int)tMovie.MovieGenreID,
-                    MovieGenreName = tMovie.MovieGenre.GenreName,
-                    MovieID = tMovie.MovieID,
-                    MovieName = tMovie.MovieName,
-                    ReleaseDate = (DateTime)tMovie.ReleaseDate
+                    movieGenreID = (int)foundMovie.movieGenreID,
+                    movieGenreName = foundMovie.movieGenre.genreName,
+                    movieID = foundMovie.movieID,
+                    movieName = foundMovie.movieName,
+                    releaseDate = (DateTime)foundMovie.releaseDate
                 };
 
                 return View(editModel);
@@ -215,36 +212,36 @@ namespace TheMovieDB.Controllers
         }
 
         [HttpPost]
-        public ActionResult EditMovie(EditMovieModel _model)
+        public ActionResult EditMovie(EditMovieModel model)
         {
             if(ModelState.IsValid)
             {
                 IdentityDBContext db = new IdentityDBContext();
 
-                Movie tMovie = db.Movies.Find(_model.MovieID);
+                Movie foundMovie = db.Movies.Find(model.movieID);
 
-                tMovie.MovieName = _model.MovieName;
-                tMovie.ReleaseDate = _model.ReleaseDate;
+                foundMovie.movieName = model.movieName;
+                foundMovie.releaseDate = model.releaseDate;
 
-                db.Movies.Attach(tMovie);
+                db.Movies.Attach(foundMovie);
 
-                db.Entry(tMovie).State = EntityState.Modified;
+                db.Entry(foundMovie).State = EntityState.Modified;
 
                 //Save changes
                 db.SaveChanges();
 
-                return RedirectToAction("ViewMovies", "MovieLib", new { _genreID = tMovie.MovieGenreID });
+                return RedirectToAction("ViewMovies", "MovieLib", new { genreID = foundMovie.movieGenreID });
             }
             return RedirectToAction("Index", "MovieLib");
         }
 
-        private int GetGenreID(string _genre)
+        private int GetGenreID(string genre)
         {
             //Get the hash code of the 
             int nameHash = 128;
-            string lowStr = _genre.ToLower();
+            string lowString = genre.ToLower();
 
-            foreach(char c in lowStr)
+            foreach(char c in lowString)
             {
                 nameHash += c;
             }
@@ -252,13 +249,13 @@ namespace TheMovieDB.Controllers
             return nameHash;
         }
 
-        private int GetMovieID(string _name)
+        private int GetMovieID(string name)
         {
             //Get the hash code of the 
             int nameHash = 16;
-            string lowStr = _name.ToLower();
+            string lowString = name.ToLower();
 
-            foreach (char c in lowStr)
+            foreach (char c in lowString)
             {
                 nameHash += c;
             }
@@ -266,11 +263,11 @@ namespace TheMovieDB.Controllers
             return nameHash;
         }
 
-        private List<Movie> GetMovieList(int _genreID, IdentityDBContext _db)
+        private List<Movie> GetMovieList(int genreID, IdentityDBContext db)
         {
-            var genreModel = _db.Genres.Include(m => m.Movies).SingleOrDefault(m => m.GenreID == _genreID);
+            var genreModel = db.Genres.Include(m => m.movies).SingleOrDefault(m => m.genreID == genreID);
 
-            return genreModel.Movies.ToList();
+            return genreModel.movies.ToList();
         }
     }
 }

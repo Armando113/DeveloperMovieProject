@@ -33,7 +33,7 @@ namespace TheMovieDB.Models
             base.OnModelCreating(modelBuilder);
 
             //Configure one-to-many
-            modelBuilder.Entity<Genre>().HasMany(m => m.Movies).WithRequired(m => m.MovieGenre).HasForeignKey(m => m.MovieGenreID);
+            modelBuilder.Entity<Genre>().HasMany(m => m.movies).WithRequired(m => m.movieGenre).HasForeignKey(m => m.movieGenreID);
         }
     }
 }

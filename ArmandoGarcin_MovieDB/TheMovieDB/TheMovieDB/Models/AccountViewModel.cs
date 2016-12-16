@@ -10,27 +10,27 @@ namespace TheMovieDB.Models
     {
         [Required]
         [Display(Name = "Username")]
-        public string UserName { get; set; }
+        public string userName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
-        public string Password { get; set; }
+        public string password { get; set; }
 
         [Display(Name = "Remember me?")]
-        public bool RememberMe { get; set; }
+        public bool rememberMe { get; set; }
     }
 
     public class DeleteViewModel
     {
         [Required]
         [Display(Name = "Username")]
-        public string UserName { get; set; }
+        public string userName { get; set; }
 
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string email { get; set; }
 
     }
 
@@ -38,16 +38,16 @@ namespace TheMovieDB.Models
     {
         [Required]
         [Display(Name = "Username")]
-        public string UserName { get; set; }
+        public string userName { get; set; }
 
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string email { get; set; }
         [Required]
         [Display(Name = "Phone")]
         [Phone]
-        public string Phone { get; set; }
+        public string phone { get; set; }
     }
 
     public class RegisterViewModel
@@ -55,12 +55,12 @@ namespace TheMovieDB.Models
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
         [Display(Name = "UserName")]
-        public string UserName { get; set; }
+        public string userName { get; set; }
 
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
@@ -71,11 +71,11 @@ namespace TheMovieDB.Models
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
-        public string ConfirmPassword { get; set; }
+        public string confirmPassword { get; set; }
 
         [DataType(DataType.PhoneNumber)]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 10)]
         [Display(Name = "Phone")]
-        public string Phone { get; set; }
+        public string phone { get; set; }
     }
 }

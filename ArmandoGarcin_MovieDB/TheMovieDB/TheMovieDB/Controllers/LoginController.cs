@@ -16,32 +16,32 @@ namespace TheMovieDB.Controllers
     public class LoginController : Controller
     {
 
-        private AppSignInManager privSignInMan;
-        private AppUserManager privUserMan;
+        private AppSignInManager _SignInMan;
+        private AppUserManager _UserMan;
 
         public AppSignInManager signInManager
         {
             get
             {
-                return privSignInMan ?? HttpContext.GetOwinContext().Get<AppSignInManager>();
+                return _SignInMan ?? HttpContext.GetOwinContext().Get<AppSignInManager>();
             }
 
             set
             {
-                privSignInMan = value;
+                _SignInMan = value;
             }
         }
 
-        public AppUserManager appUserMan
+        public AppUserManager appUserManager
         {
             get
             {
-                return privUserMan ?? HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
+                return _UserMan ?? HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
             }
 
             set
             {
-                privUserMan = value;
+                _UserMan = value;
             }
         }
 
@@ -70,12 +70,12 @@ namespace TheMovieDB.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> CreateUser(RegisterViewModel _model)
+        public async Task<ActionResult> CreateUser(RegisterViewModel model)
         {
             if(ModelState.IsValid)
             {
-                var user = new AppUser { UserName = _model.UserName, Email = _model.Email, Phone = _model.Phone };
-                var result = await appUserMan.CreateAsync(user, _model.Password);
+                var user = new AppUser { UserName = model.userName, Email = model.email, Phone = model.phone };
+                var result = await appUserManager.CreateAsync(user, model.Password);
 
                 if(result.Succeeded && !AuthenticationManager.User.Identity.IsAuthenticated)
                 {
@@ -88,36 +88,26 @@ namespace TheMovieDB.Controllers
                 AddErrors(result);
             }
 
-            return View(_model);
+            return View(model);
         }
 
         public ActionResult ViewAccounts()
         {
             //Get the values from the object model
-            IdentityDBContext DBContext = new IdentityDBContext();
-
-            List<Models.AppUser> UserList = new List<Models.AppUser>();
-
-            //Get our current logged in user
-            string userID = User.Identity.GetUserName();
-
-            //Get the users from the database
-            foreach(Models.AppUser _user in DBContext.Users)
-            {
-                if(!_user.UserName.Equals(userID))
-                {
-                    UserList.Add(_user);
-                }
-            }
-
+            IdentityDBContext dbContext = new IdentityDBContext();
+            //Create a string woith the current user
+            string currentUserId = User.Identity.GetUserId();
+            //Create the list of users, and exclude the one currently logged in
+            List<Models.AppUser> UserList = dbContext.Users.Select(x => x).Where(x => !x.Id.Equals(currentUserId)).ToList();
+            //Return the list to the View
             return View(UserList);
         }
 
         //HttpGet
         [AllowAnonymous]
-        public ActionResult LoginUser(string _returnURL)
+        public ActionResult LoginUser(string returnURL)
         {
-            ViewBag.ReturnURL = _returnURL;
+            ViewBag.ReturnURL = returnURL;
             return View();
         }
 
@@ -125,24 +115,23 @@ namespace TheMovieDB.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> LoginUser(LoginViewModel _model, string _returnURL)
+        public async Task<ActionResult> LoginUser(LoginViewModel model, string returnURL)
         {
             if(!ModelState.IsValid)
             {
-                return View(_model);
+                return View(model);
             }
-
             //PasswordSignInAsync works with username, NOT Email!!
-            var result = await signInManager.PasswordSignInAsync(_model.UserName, _model.Password, _model.RememberMe, shouldLockout: false);
-
+            var result = await signInManager.PasswordSignInAsync(model.userName, model.password, model.rememberMe, shouldLockout: false);
+            //Check the result of the SignIn
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(_returnURL);
+                    return RedirectToLocal(returnURL);
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt");
-                    return View(_model);
+                    return View(model);
             }
 
         }
@@ -156,22 +145,18 @@ namespace TheMovieDB.Controllers
         }
 
         [HttpGet]
-        public ActionResult EditUser(string _user)
+        public ActionResult EditUser(string user)
         {
             if(Request.IsAuthenticated)
             {
                 //Find the user if it exists
                 IdentityDBContext dbContext = new IdentityDBContext();
-
-                foreach (AppUser tUser in dbContext.Users)
-                {
-                    if (tUser.UserName.Equals(_user))
-                    {
-                        var tEdit = new EditViewModel { UserName = tUser.UserName, Email = tUser.Email, Phone = tUser.Phone };
-
-                        return View(tEdit);
-                    }
-                }
+                //Use Entity to get the selected user
+                AppUser foundUser = dbContext.Users.Select(x => x).FirstOrDefault(x => x.Id.Equals(user));
+                //Create the model
+                var editModel = new EditViewModel { userName = foundUser.UserName, email = foundUser.Email, phone = foundUser.Phone };
+                //Return the edit model
+                return View(editModel);
             }
             return View();
         }
@@ -179,7 +164,7 @@ namespace TheMovieDB.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public async Task<ActionResult> EditUser(EditViewModel _model)
+        public async Task<ActionResult> EditUser(EditViewModel model)
         {
             if(!ModelState.IsValid)
             {
@@ -187,17 +172,17 @@ namespace TheMovieDB.Controllers
             }
 
             //Update data
-            var tUser = appUserMan.FindByEmail(_model.Email);
+            var userToEdit = appUserManager.FindByEmail(model.email);
 
             IdentityDBContext dbContext = new IdentityDBContext();
 
             using (var transaction = dbContext.Database.BeginTransaction())
             {
                 //Edit all available settings
-                tUser.Phone = _model.Phone;
+                userToEdit.Phone = model.phone;
 
                 //Update in the database
-                await appUserMan.UpdateAsync(tUser);
+                await appUserManager.UpdateAsync(userToEdit);
                 transaction.Commit();
             }
 
@@ -205,24 +190,20 @@ namespace TheMovieDB.Controllers
         }
 
         [HttpGet]
-        public ActionResult DeleteUser(string _user)
+        public ActionResult DeleteUser(string user)
         {
             if(Request.IsAuthenticated)
             {
-                if (!User.Identity.GetUserName().Equals(_user))
+                if (!User.Identity.GetUserName().Equals(user))
                 {
                     //Find the user if it exists
                     IdentityDBContext dbContext = new IdentityDBContext();
 
-                    foreach (AppUser tUser in dbContext.Users)
-                    {
-                        if (tUser.UserName.Equals(_user))
-                        {
-                            var tDelete = new DeleteViewModel { UserName = tUser.UserName, Email = tUser.Email };
+                    AppUser userToDelete = dbContext.Users.FirstOrDefault(x => x.Id.Equals(user));
 
-                            return View(tDelete);
-                        }
-                    }
+                    var deleteModel = new DeleteViewModel { userName = userToDelete.UserName, email = userToDelete.Email };
+
+                    return View(deleteModel);
                 }
             }
             return View();
@@ -231,73 +212,58 @@ namespace TheMovieDB.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteUser(DeleteViewModel _model)
+        public async Task<ActionResult> DeleteUser(DeleteViewModel model)
         {
             if(!ModelState.IsValid)
             {
                 return RedirectToAction("Index", "Login");
             }
-
-            var tUser = appUserMan.FindByEmail(_model.Email);
-            var tLogins = tUser.Logins;
-            var tRoles = await appUserMan.GetRolesAsync(tUser.Id);
+            //Get the user to delete
+            var deleteUser = appUserManager.FindByEmail(model.email);
+            //Get the Logins from the User
+            var userLogins = deleteUser.Logins;
+            //Get the roles the user has
+            var userRoles = await appUserManager.GetRolesAsync(deleteUser.Id);
+            //create the DB context
             IdentityDBContext dbContext = new IdentityDBContext();
             using (var transaction = dbContext.Database.BeginTransaction())
             {
-                foreach(var logins in tLogins.ToList())
+                foreach(var logins in userLogins.ToList())
                 {
-                    await appUserMan.RemoveLoginAsync(logins.UserId, new UserLoginInfo(logins.LoginProvider, logins.ProviderKey));
+                    await appUserManager.RemoveLoginAsync(logins.UserId, new UserLoginInfo(logins.LoginProvider, logins.ProviderKey));
                 }
 
-                if(tRoles.Count() > 0)
+                if(userRoles.Count() > 0)
                 {
-                    foreach(var item in tRoles.ToList())
+                    foreach(var item in userRoles.ToList())
                     {
-                        var result = await appUserMan.RemoveFromRoleAsync(tUser.Id, item);
+                        var result = await appUserManager.RemoveFromRoleAsync(deleteUser.Id, item);
                     }
                 }
 
-                await appUserMan.DeleteAsync(tUser);
+                await appUserManager.DeleteAsync(deleteUser);
                 transaction.Commit();
             }
             //Else, just return to the View Accounts page
             return RedirectToAction("ViewAccounts", "Login");
         }
 
-        private void AddErrors(IdentityResult _result)
+        private void AddErrors(IdentityResult result)
         {
-            foreach(var error in _result.Errors)
+            foreach(var error in result.Errors)
             {
                 ModelState.AddModelError("", error);
             }
         }
 
-        private ActionResult RedirectToLocal(string _returnURL)
+        private ActionResult RedirectToLocal(string returnURL)
         {
-            if(Url.IsLocalUrl(_returnURL))
+            if(Url.IsLocalUrl(returnURL))
             {
-                return Redirect(_returnURL);
+                return Redirect(returnURL);
             }
 
             return RedirectToAction("Index", "Home");
-        }
-
-        private AppUser FindUserViaUsername(string _username)
-        {
-
-            //Find the user if it exists
-            IdentityDBContext dbContext = new IdentityDBContext();
-
-
-            foreach (AppUser tUser in dbContext.Users)
-            {
-                if (tUser.UserName.Equals(_username))
-                {
-                    return tUser;
-                }
-            }
-
-            return null;
         }
     }
 }

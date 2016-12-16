@@ -13,27 +13,27 @@
     if (Request.IsAuthenticated)
     {
         @Html.AntiForgeryToken()
-        @Html.HiddenFor(m => m.Email)
-        @Html.HiddenFor(m => m.UserName)
+        @Html.HiddenFor(m => m.email)
+        @Html.HiddenFor(m => m.userName)
         <div class="form-group dl-horizontal">
             <hr />
             <dl>
                 <dt>
-                    @Html.DisplayNameFor(model => model.UserName)
+                    @Html.DisplayNameFor(model => model.userName)
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.UserName, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.UserName)
+                    @Html.DisplayFor(model => model.userName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.userName)
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.Email)
+                    @Html.DisplayNameFor(model => model.email)
                 </dt>
 
                 <dd>
-                    @Html.DisplayFor(model => model.Email, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Email)
+                    @Html.DisplayFor(model => model.email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.email)
                 </dd>
 
             </dl>

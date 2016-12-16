@@ -15,29 +15,29 @@
 
         <div class="form-group dl-horizontal">
             <hr/>
-            @Html.HiddenFor(m => m.UserName)
-            @Html.HiddenFor(m => m.Email)
+            @Html.HiddenFor(m => m.userName)
+            @Html.HiddenFor(m => m.email)
             <dl>
                 <dt>
-                    @Html.DisplayNameFor(m => m.Email)
+                    @Html.DisplayNameFor(m => m.email)
                 </dt>
                 <dd>
-                    @Html.DisplayFor(m => m.Email, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Email)
+                    @Html.DisplayFor(m => m.email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.email)
                 </dd>
                 <dt>
-                    @Html.DisplayNameFor(m => m.UserName)
+                    @Html.DisplayNameFor(m => m.userName)
                 </dt>
                 <dd>
-                    @Html.DisplayFor(m => m.UserName, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.UserName)
+                    @Html.DisplayFor(m => m.userName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.userName)
                 </dd>
                 <dt>
-                    @Html.DisplayNameFor(m => m.Phone)
+                    @Html.DisplayNameFor(m => m.phone)
                 </dt>
                 <dd>
-                    @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Phone)
+                    @Html.TextBoxFor(m => m.phone, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.phone)
                 </dd>
             </dl>
             <div class="form-actions no-color">

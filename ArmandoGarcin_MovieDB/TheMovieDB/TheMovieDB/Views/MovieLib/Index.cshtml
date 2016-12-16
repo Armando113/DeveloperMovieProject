@@ -11,7 +11,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(m => m.GenreName)
+            @Html.DisplayNameFor(m => m.genreName)
         </th>
         <th></th>
         <hr/>
@@ -21,15 +21,15 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(m => item.GenreName)
+                @Html.DisplayFor(m => item.genreName)
             </td>
             <td>
-                @Html.ActionLink("View Movies", "ViewMovies", new { _genreID = item.GenreID})
+                @Html.ActionLink("View Movies", "ViewMovies", new { genreID = item.genreID})
             </td>
             @if(Request.IsAuthenticated)
             {
                 <td>
-                    @Html.ActionLink("Delete Genre", "DeleteGenre", new { _genreID = item.GenreID })
+                    @Html.ActionLink("Delete Genre", "DeleteGenre", new { genreID = item.genreID })
                 </td>
             }
         </tr>
