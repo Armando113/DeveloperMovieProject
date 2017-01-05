@@ -1,6 +1,6 @@
 ﻿<!--This is the page where we will view the Genres of movies (not the movies themselves!)-->
 <!--Insert model type here (presumably MovieDB.Genre or something of the like)-->
-@model IEnumerable<TheMovieDB.MovieData.Genre>
+@model TheMovieDB.MovieData.ViewGenreModel
 @{
     ViewBag.Title = "Movie Library";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,16 +8,33 @@
 
 <h2>Movie Genres</h2>
 
+<h3>Latest Genres</h3>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(m =>m.latestGenres)</th>
+        <th></th>
+    </tr>
+    @Html.AntiForgeryToken()
+    @foreach(var item in Model.latestGenres)
+    {
+        <tr>
+            <td>@Html.DisplayFor(m => item.genreName)</td>
+        </tr>
+    }
+</table>
+
+<h3>Movie Genre List</h3>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(m => m.genreName)
+            @Html.DisplayNameFor(m => m.genreList)
         </th>
         <th></th>
         <hr/>
     </tr>
     @Html.AntiForgeryToken()
-    @foreach(var item in Model)
+    @foreach(var item in Model.genreList)
     {
         <tr>
             <td>

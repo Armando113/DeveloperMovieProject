@@ -16,10 +16,14 @@ namespace TheMovieDB.Controllers
         public ActionResult Index()
         {
             IdentityDBContext db = new IdentityDBContext();
+            //The view model
+            TheMovieDB.MovieData.ViewGenreModel viewModel = new ViewGenreModel()
+            {
+                genreList = db.Genres.ToList(),
+                latestGenres = db.Genres.OrderByDescending(x => x.genreID).Take(5).ToList()
+            };
 
-            List<Genre> genreList = db.Genres.ToList();
-
-            return View(genreList);
+            return View(viewModel);
         }
 
         public ActionResult MovieView()

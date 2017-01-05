@@ -6,6 +6,16 @@ using System.Web;
 
 namespace TheMovieDB.MovieData
 {
+
+    public class ViewGenreModel
+    {
+        [Display(Name = "New Genres")]
+        public List<Genre> latestGenres;
+
+        [Display(Name = "Genre List")]
+        public List<Genre> genreList;
+    }
+
     public class AddGenreModel
     {
         [Required]
