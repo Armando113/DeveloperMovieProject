@@ -52,7 +52,7 @@ namespace TheMovieDB.Controllers
             //The context of the DB
             IdentityDBContext db = new IdentityDBContext();
             //Genre does not exist, proceed with the addition to DB
-            Genre newGenre = new Genre() { genreID = temporalID, genreName = model.genreName };
+            var newGenre = new Genre() { genreID = temporalID, genreName = model.genreName };
             //Add it to the DB
             db.Genres.Add(newGenre);
             //Commit
@@ -71,7 +71,7 @@ namespace TheMovieDB.Controllers
             //Create context
             IdentityDBContext db = new IdentityDBContext();
             //Get the genre to delete
-            Genre genreToDelete = db.Genres.Find(genreID);
+            var genreToDelete = db.Genres.Find(genreID);
             //Get the list from the database
             List<Movie> movieList = GetMovieList(genreToDelete.genreID, db);
             //Erase the genre if it has no movies
@@ -96,7 +96,7 @@ namespace TheMovieDB.Controllers
             //Create context
             IdentityDBContext dbContext = new IdentityDBContext();
             //Create the model for the view
-            ViewMovieModel model = new ViewMovieModel() { movieGenreID = genreID, movieList = GetMovieList(genreID, dbContext) };
+            var model = new ViewMovieModel() { movieGenreID = genreID, movieList = GetMovieList(genreID, dbContext) };
             //Return the view with the model
             return View(model);
         }
@@ -112,16 +112,18 @@ namespace TheMovieDB.Controllers
             //Create the context
             IdentityDBContext db = new IdentityDBContext();
             //The genre we found
-            Genre foundGenre = db.Genres.Find(genreID);
+            var foundGenre = db.Genres.Find(genreID);
 
-            if (foundGenre != null)
+            if (foundGenre == null)
             {
-                AddMovieModel newModel = new AddMovieModel() { movieGenreID = foundGenre.genreID, movieGenreName = foundGenre.genreName };
+                //Add errors here
 
-                return View(newModel);
+                return RedirectToAction("Index", "MovieLib");
             }
 
-            return RedirectToAction("Index", "MovieLib");
+            var newModel = new AddMovieModel() { movieGenreID = foundGenre.genreID, movieGenreName = foundGenre.genreName };
+
+            return View(newModel);
         }
 
         [HttpPost]
@@ -133,14 +135,15 @@ namespace TheMovieDB.Controllers
             }
 
             IdentityDBContext db = new IdentityDBContext();
+
             //Find the Genre by ID in the DB
             Genre foundGenre = db.Genres.Find(model.movieGenreID);
             //Create the movie 
-            Movie newMovie = new Movie() { movieID = GetMovieID(model.movieName), movieName = model.movieName, releaseDate = model.releaseDate, movieGenre = foundGenre, movieGenreID = foundGenre.genreID };
+            var newMovie = new Movie() { movieID = GetMovieID(model.movieName), movieName = model.movieName, releaseDate = model.releaseDate, movieGenre = foundGenre, movieGenreID = foundGenre.genreID };
             //Get the list from the Genre table
-            List<Movie> genreContext = GetMovieList(model.movieGenreID, db);
+            List<Movie> movieList = GetMovieList(model.movieGenreID, db);
             //Add movie to the list
-            genreContext.Add(newMovie);
+            movieList.Add(newMovie);
             //Now, add the Movie to the DB
             db.Movies.Add(newMovie);
             //Save changes in the DB
@@ -160,22 +163,23 @@ namespace TheMovieDB.Controllers
             //Get the Database
             IdentityDBContext db = new IdentityDBContext();
             //Find the movie
-            Movie foundMovie = db.Movies.Find(movieID);
+            var foundMovie = db.Movies.Find(movieID);
             //Check if the movie exists
-            if (foundMovie != null)
+            if (foundMovie == null)
             {
-                //Delete the movie from the Genre list
-                List<Movie> movieList = GetMovieList((int)foundMovie.movieGenreID, db);
-                //Romeove it from the list
-                movieList.Remove(foundMovie);
-                //Remove
-                db.Movies.Remove(foundMovie);
-                //Save Changes
-                db.SaveChanges();
-                //Return to the movie list of the genre
-                return RedirectToAction("ViewMovies", "MovieLib", new { genreID = foundMovie.movieGenreID });
+                //Add errors here
+                return RedirectToAction("Index", "MovieLib");
             }
-            return RedirectToAction("Index", "MovieLib");
+            //Delete the movie from the Genre list
+            List<Movie> movieList = GetMovieList((int)foundMovie.movieGenreID, db);
+            //Romeove it from the list
+            movieList.Remove(foundMovie);
+            //Remove
+            db.Movies.Remove(foundMovie);
+            //Save Changes
+            db.SaveChanges();
+            //Return to the movie list of the genre
+            return RedirectToAction("ViewMovies", "MovieLib", new { genreID = foundMovie.movieGenreID });
         }
 
         [HttpGet]
@@ -188,9 +192,9 @@ namespace TheMovieDB.Controllers
 
             IdentityDBContext db = new IdentityDBContext();
 
-            Movie foundMovie = db.Movies.Find(movieID);
+            var foundMovie = db.Movies.Find(movieID);
 
-            EditMovieModel editModel = new EditMovieModel()
+            var editModel = new EditMovieModel()
             {
                 movieGenreID = (int)foundMovie.movieGenreID,
                 movieGenreName = foundMovie.movieGenre.genreName,
@@ -212,7 +216,7 @@ namespace TheMovieDB.Controllers
 
             IdentityDBContext db = new IdentityDBContext();
 
-            Movie foundMovie = db.Movies.Find(model.movieID);
+            var foundMovie = db.Movies.Find(model.movieID);
 
             foundMovie.movieName = model.movieName;
             foundMovie.releaseDate = model.releaseDate;

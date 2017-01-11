@@ -154,7 +154,7 @@ namespace TheMovieDB.Controllers
             //Find the user if it exists
             IdentityDBContext dbContext = new IdentityDBContext();
             //Use Entity to get the selected user
-            AppUser foundUser = dbContext.Users.Select(x => x).FirstOrDefault(x => x.Id.Equals(user));
+            var foundUser = dbContext.Users.Select(x => x).FirstOrDefault(x => x.Id.Equals(user));
             //Create the model
             var editModel = new EditViewModel { userName = foundUser.UserName, email = foundUser.Email, phone = foundUser.Phone };
             //Return the edit model
@@ -205,7 +205,7 @@ namespace TheMovieDB.Controllers
             //Create the context
             IdentityDBContext dbContext = new IdentityDBContext();
             //Find the desired user to delete
-            AppUser userToDelete = dbContext.Users.FirstOrDefault(x => x.Id.Equals(user));
+            var userToDelete = dbContext.Users.FirstOrDefault(x => x.Id.Equals(user));
             //Create the model for the view
             var deleteModel = new DeleteViewModel { userName = userToDelete.UserName, email = userToDelete.Email };
 
